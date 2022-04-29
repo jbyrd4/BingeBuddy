@@ -77,6 +77,8 @@ namespace BingeBuddy.Auth
 
             var newUserProfile = new UserProfile
             {
+                Name = registration.Name,
+                UserName = registration.UserName,
                 Email = fbUser.Email,
                 FirebaseUserId = fbUser.FirebaseUserId,
             };
@@ -99,6 +101,7 @@ namespace BingeBuddy.Auth
             {
                 new Claim(ClaimTypes.NameIdentifier, userProfile.Id.ToString()),
                 new Claim(ClaimTypes.Email, userProfile.Email),
+                new Claim(ClaimTypes.Role, (userProfile.Admin.ToString()))
             };
 
             var claimsIdentity = new ClaimsIdentity(
