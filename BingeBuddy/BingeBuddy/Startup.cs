@@ -31,6 +31,9 @@ namespace BingeBuddy
             services.AddTransient<IFirebaseAuthService, FirebaseAuthService>();
             services.AddTransient<IUserProfileRepository, UserProfileRepository>();
             services.AddTransient<IShowRepository, ShowRepository>();
+            services.AddTransient<IPlatformRepository, PlatformRepository>();
+            services.AddTransient<ICategoryRepository, CategoryRepository>();
+            services.AddTransient<IUserShowRepository, UserShowRepository>();
 
             services.AddControllersWithViews().AddRazorRuntimeCompilation();
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

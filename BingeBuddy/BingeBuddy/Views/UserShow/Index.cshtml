@@ -1,0 +1,86 @@
+﻿@model IEnumerable<BingeBuddy.Models.UserShow>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>My Shows</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Show.CoverImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Show.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Platform.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastReleasedSeason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastReleasedEpisode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastWatchedSeason)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastWatchedEpisode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Note)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateUpdated)
+            </th>
+
+
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Show.CoverImage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Show.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Platform.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastReleasedSeason)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastReleasedEpisode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastWatchedSeason)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastWatchedEpisode)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Note)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateUpdated)
+                </td>
+
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

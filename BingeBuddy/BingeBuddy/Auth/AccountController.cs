@@ -66,7 +66,7 @@ namespace BingeBuddy.Auth
             {
                 return View(registration);
             }
-
+           
             var fbUser = await _firebaseAuthService.Register(registration);
 
             if (fbUser == null)
