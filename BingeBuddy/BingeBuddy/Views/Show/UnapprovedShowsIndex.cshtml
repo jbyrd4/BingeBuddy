@@ -1,0 +1,62 @@
+﻿@model IEnumerable<BingeBuddy.Models.Show>
+
+@{
+    ViewData["Title"] = "UnapprovedShowsIndex";
+}
+
+<h1>Unapproved Shows</h1>
+
+<p>
+    <a asp-action="Index">Back to Main List</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CoverImage)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cancelled)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Approved)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.CoverImage)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cancelled)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Approved)
+                </td>
+                @if (User.IsInRole("True"))
+                {
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
+                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    </td>
+                }
+            </tr>
+        }
+    </tbody>
+</table>
