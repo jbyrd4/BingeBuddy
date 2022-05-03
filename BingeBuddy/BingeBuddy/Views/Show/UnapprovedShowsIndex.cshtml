@@ -13,13 +13,10 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.CoverImage)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CoverImage)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cancelled)
@@ -35,13 +32,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                   <img style="width: 100px" src="@item.CoverImage" alt="Cover Image" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CoverImage)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Cancelled)

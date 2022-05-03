@@ -203,20 +203,117 @@ namespace BingeBuddy.Repositories
                         INSERT INTO UserShow (ShowId, UserId, LastWatchedSeason, LastWatchedEpisode, LastReleasedSeason, LastReleasedEpisode, DateUpdated, Note, PlatformId, CategoryId)
                         OUTPUT INSERTED.ID
                         VALUES (@ShowId, @UserId, @LastWatchedSeason, @LastWatchedEpisode, @LastReleasedSeason, @LastReleasedEpisode, @DateUpdated, @Note, @PlatformId, @CategoryId)";
-                    
-                    cmd.Parameters.AddWithValue("@ShowId", userShow.Show.Id);
-                    cmd.Parameters.AddWithValue("@UserId", userShow.UserId);
-                    cmd.Parameters.AddWithValue("@LastWatchedSeason", userShow.LastWatchedSeason);
-                    cmd.Parameters.AddWithValue("@LastWatchedEpisode", userShow.LastWatchedEpisode);
-                    cmd.Parameters.AddWithValue("@LastReleasedEpisode", userShow.LastReleasedEpisode);
-                    cmd.Parameters.AddWithValue("@LastReleasedSeason", userShow.LastReleasedSeason);
-                    cmd.Parameters.AddWithValue("@DateUpdated", userShow.DateUpdated);
-                    cmd.Parameters.AddWithValue("@Note", userShow.Note);
-                    cmd.Parameters.AddWithValue("@PlatformId", userShow.PlatformId);
-                    cmd.Parameters.AddWithValue("@CategoryId", userShow.CategoryId);
 
+                    DbUtils.AddParameter(cmd, "@ShowId", userShow.Show.Id);
+                    DbUtils.AddParameter(cmd, "@UserId", userShow.UserId);
+                    DbUtils.AddParameter(cmd, "@LastWatchedSeason", userShow.LastWatchedSeason);
+                    DbUtils.AddParameter(cmd, "@LastWatchedEpisode", userShow.LastWatchedEpisode);
+                    DbUtils.AddParameter(cmd, "@LastReleasedEpisode", userShow.LastReleasedEpisode);
+                    DbUtils.AddParameter(cmd, "@LastReleasedSeason", userShow.LastReleasedSeason);
+                    DbUtils.AddParameter(cmd, "@DateUpdated", userShow.DateUpdated);
+                    DbUtils.AddParameter(cmd, "@PlatformId", userShow.PlatformId);
+                    DbUtils.AddParameter(cmd, "@Note", userShow.Note);
+                    DbUtils.AddParameter(cmd, "@CategoryId", userShow.CategoryId);
 
                     userShow.Id = (int)cmd.ExecuteScalar();
+                }
+            }
+        }
+
+        public void Delete(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"DELETE FROM UserShow
+                                        WHERE Id = @id";
+
+                    DbUtils.AddParameter(cmd, "@id", id);
+
+                    cmd.ExecuteNonQuery();
+                }
+            }
+        }
+
+        public UserShow GetById(int id)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"SELECT Id, ShowId, UserId, LastWatchedSeason, LastWatchedEpisode, LastReleasedSeason, LastReleasedEpisode, DateUpdated, Note, PlatformId, CategoryId
+                                        FROM UserShow
+                                        WHERE Id = @id";
+
+                    DbUtils.AddParameter(cmd, "@id", id);
+                    var reader = cmd.ExecuteReader();
+
+
+                    if (reader.Read())
+                    {
+                        UserShow userShow = new UserShow()
+                        {
+                            Id = DbUtils.GetInt(reader, "Id"),
+                            ShowId = DbUtils.GetInt(reader, "ShowId"),
+                            UserId = DbUtils.GetInt(reader, "UserId"),
+                            LastWatchedSeason = DbUtils.GetInt(reader, "LastWatchedSeason"),
+                            LastWatchedEpisode = DbUtils.GetInt(reader, "LastWatchedEpisode"),
+                            LastReleasedEpisode = DbUtils.GetInt(reader, "LastReleasedEpisode"),
+                            LastReleasedSeason = DbUtils.GetInt(reader, "LastReleasedSeason"),
+                            DateUpdated = DbUtils.GetDateTime(reader, "DateUpdated"),
+                            Note = DbUtils.GetString(reader, "Note"),
+                            PlatformId = DbUtils.GetInt(reader, "PlatformId"),
+                            CategoryId = DbUtils.GetInt(reader, "CategoryId")
+                        };
+
+                        reader.Close();
+                        return userShow;
+                    }
+                    else
+                    {
+                        return null;
+                    }
+                }
+            }
+        }
+
+        public void Edit(UserShow userShow)
+        {
+            using (var conn = Connection)
+            {
+                conn.Open();
+                using (var cmd = conn.CreateCommand())
+                {
+                    cmd.CommandText = @"UPDATE UserShow
+                                        SET
+                                            ShowId = @showId,
+                                            UserId = @userId,
+                                            LastWatchedSeason = @lastWatchedSeason,
+                                            LastWatchedEpisode = @lastWatchedEpisode,
+                                            LastReleasedSeason = @lastReleasedSeason,
+                                            LastReleasedEpisode = @lastReleasedEpisode,
+                                            DateUpdated = @dateUpdated,
+                                            Note = @note,
+                                            PlatformId = @platformId,
+                                            CategoryId = @categoryId
+                                        WHERE Id = @id";
+
+                    DbUtils.AddParameter(cmd, "@showId", userShow.ShowId);
+                    DbUtils.AddParameter(cmd, "@userId", userShow.UserId);
+                    DbUtils.AddParameter(cmd, "@lastWatchedSeason", userShow.LastWatchedSeason);
+                    DbUtils.AddParameter(cmd, "@lastWatchedEpisode", userShow.LastWatchedEpisode);
+                    DbUtils.AddParameter(cmd, "@lastReleasedSeason", userShow.LastReleasedSeason);
+                    DbUtils.AddParameter(cmd, "@lastReleasedEpisode", userShow.LastReleasedEpisode);
+                    DbUtils.AddParameter(cmd, "@dateUpdated", userShow.DateUpdated);
+                    DbUtils.AddParameter(cmd, "@note", userShow.Note);
+                    DbUtils.AddParameter(cmd, "@platformId", userShow.PlatformId);
+                    DbUtils.AddParameter(cmd, "@categoryId", userShow.CategoryId);
+                    DbUtils.AddParameter(cmd, "@id", userShow.Id);
+
+                    cmd.ExecuteNonQuery();
                 }
             }
         }

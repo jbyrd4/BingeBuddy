@@ -1,0 +1,88 @@
+﻿@model BingeBuddy.Models.ViewModels.UserShowViewModel
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h1>Edit</h1>
+
+<h4>UserShow</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <input asp-for="userShow.Id" type="hidden" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="userShow.LastWatchedSeason" class="control-label"></label>
+                <input asp-for="userShow.LastWatchedSeason" class="form-control" />
+                <span asp-validation-for="userShow.LastWatchedSeason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userShow.LastWatchedEpisode" class="control-label"></label>
+                <input asp-for="userShow.LastWatchedEpisode" class="form-control" />
+                <span asp-validation-for="userShow.LastWatchedEpisode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userShow.LastReleasedSeason" class="control-label"></label>
+                <input asp-for="userShow.LastReleasedSeason" class="form-control" />
+                <span asp-validation-for="userShow.LastReleasedSeason" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userShow.LastReleasedEpisode" class="control-label"></label>
+                <input asp-for="userShow.LastReleasedEpisode" class="form-control" />
+                <span asp-validation-for="userShow.LastReleasedEpisode" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userShow.Note" class="control-label"></label>
+                <input asp-for="userShow.Note" class="form-control" />
+                <span asp-validation-for="userShow.Note" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userShow.PlatformId" class="control-label"></label>
+                <select asp-for="userShow.PlatformId" class="form-control">
+                    @foreach (Platform platform in Model.PlatformOptions)
+                    {
+                        <option value="@platform.Id">@platform.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="userShow.PlatformId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userShow.CategoryId" class="control-label"></label>
+                <select asp-for="userShow.CategoryId" class="form-control">
+                    @foreach (var category in Model.CategoryOptions)
+                    {
+                        <option value="@category.Id">@category.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="userShow.CategoryId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userShow.ShowId" class="control-label"></label>
+                <select asp-for="userShow.ShowId" class="form-control">
+                    @foreach (var show in Model.ShowOptions)
+                    {
+                        <option value="@show.Id">@show.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="userShow.ShowId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{
+    await Html.RenderPartialAsync("_ValidationScriptsPartial");
+}
+}
