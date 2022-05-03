@@ -4,7 +4,7 @@
     ViewData["Title"] = "PotentialIndex";
 }
 
-<h1>PotentialIndex</h1>
+<h2>Potential Shows</h2>
 
 <p>
     <a asp-action="Create">Create New</a>
@@ -13,37 +13,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.Show.CoverImage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastWatchedSeason)
+                @Html.DisplayNameFor(model => model.Show.Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastWatchedEpisode)
+                @Html.DisplayNameFor(model => model.Platform.Name)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastReleasedSeason)
+                @Html.DisplayNameFor(model => model.LastReleased)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LastReleasedEpisode)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateUpdated)
+                @Html.DisplayNameFor(model => model.LastWatched)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Note)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PlatformId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CategoryId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ShowId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.UserId)
+                @Html.DisplayNameFor(model => model.DateUpdated)
             </th>
             <th></th>
         </tr>
@@ -53,37 +41,25 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    <img style="width: 100px" src="@item.Show.CoverImage" alt="Cover Image" />
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastWatchedSeason)
+                    @Html.DisplayFor(modelItem => item.Show.Title)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastWatchedEpisode)
+                    @Html.DisplayFor(modelItem => item.Platform.Name)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastReleasedSeason)
+                    @Html.DisplayFor(modelItem => item.LastReleased)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.LastReleasedEpisode)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateUpdated)
+                    @Html.DisplayFor(modelItem => item.LastWatched)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Note)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.PlatformId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CategoryId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.ShowId)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.UserId)
+                    @Html.DisplayFor(modelItem => item.DateUpdated)
                 </td>
                 <td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id })
