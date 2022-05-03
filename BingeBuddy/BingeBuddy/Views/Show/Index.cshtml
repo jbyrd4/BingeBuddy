@@ -4,31 +4,23 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Add a New Show</h1>
+<h1>All Shows</h1>
 
-<p>
+<p style="display: inline">
     <a asp-action="Create">Add New Show</a>
+    @if (User.IsInRole("True"))
+    {
+        <nobr>|| <a asp-action="ApprovedShowsIndex">See Approved Shows</a> || <a asp-action="UnapprovedShowsIndex">See Unapproved Shows</a></nobr>
+    }
 </p>
-@if (User.IsInRole("True"))
-{
-    <p>
-        <a asp-action="ApprovedShowsIndex">See Approved Shows</a>
-    </p>
-    <p>
-        <a asp-action="UnapprovedShowsIndex">See Unapproved Shows</a>
-    </p>
-}
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Id)
+                @Html.DisplayNameFor(model => model.CoverImage)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CoverImage)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Cancelled)
@@ -44,13 +36,10 @@
         {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Id)
+                    <img style="width: 100px" src="@item.CoverImage" alt="Cover Image" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Title)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.CoverImage)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Cancelled)

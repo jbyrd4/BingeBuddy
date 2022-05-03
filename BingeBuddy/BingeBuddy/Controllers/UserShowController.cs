@@ -3,6 +3,7 @@ using BingeBuddy.Models.ViewModels;
 using BingeBuddy.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -130,42 +131,59 @@ namespace BingeBuddy.Controllers
         // GET: UserShowController/Edit/5
         public ActionResult Edit(int id)
         {
-            return View();
+            var vm = new UserShowViewModel();
+            vm.userShow = _userShowRepository.GetById(id);
+            vm.CategoryOptions = _categoryRepository.GetAllCategories();
+            vm.PlatformOptions = _platformRepository.GetAllPlatforms();
+            vm.ShowOptions = _showRepository.GetAllShows();
+            return View(vm);
         }
 
         // POST: UserShowController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, UserShowViewModel vm)
         {
             try
             {
+                vm.userShow.DateUpdated = DateTime.Now;
+                vm.userShow.UserId = GetCurrentUserId();
+                _userShowRepository.Edit(vm.userShow);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return RedirectToAction(nameof(Edit), new {id});
             }
         }
 
         // GET: UserShowController/Delete/5
         public ActionResult Delete(int id)
         {
-            return View();
+            UserShow userShow = _userShowRepository.GetById(id);
+            if (userShow != null)
+            {
+                return View(userShow);
+            }
+            else
+            {
+                return NotFound();
+            }
         }
 
         // POST: UserShowController/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public ActionResult Delete(int id, UserShow userShow)
         {
             try
             {
+                _userShowRepository.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                return View(userShow);
             }
         }
 

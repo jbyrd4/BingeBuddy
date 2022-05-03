@@ -22,5 +22,20 @@ namespace BingeBuddy.Models
         [Required]
         public int UserId { get; set; }
         public UserProfile UserProfile { get; set; }
+        public string LastReleased
+        {
+            get
+            {
+                return "S"+LastReleasedSeason+"E"+LastReleasedEpisode;
+            }
+        }
+
+        public string LastWatched
+        {
+            get
+            {
+                return "S" + LastWatchedSeason + "E" + LastWatchedEpisode;
+            }
+        }
     }
 }
