@@ -53,6 +53,21 @@ namespace BingeBuddy.Controllers
             }
         }
 
+        public ActionResult CurrentlyWatchingIndex(int categoryId)
+        {
+            categoryId = 1;
+            if (GetCurrentUserId() > 0)
+            {
+                int userId = GetCurrentUserId();
+                List<UserShow> userShows = _userShowRepository.GetUserShowsByCategoryId(userId, categoryId);
+                return View(userShows);
+            }
+            else
+            {
+                return NotFound();
+            }
+        }
+
         public ActionResult LostInterestIndex(int categoryId)
         {
             categoryId = 4;
@@ -115,7 +130,7 @@ namespace BingeBuddy.Controllers
         {
             try
             {
-                vm.userShow.DateUpdated = System.DateTime.Now;
+                vm.userShow.DateUpdated = DateTime.Now;
                 vm.userShow.UserId = GetCurrentUserId();
 
                 _userShowRepository.Add(vm.userShow);

@@ -4,31 +4,40 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
+<h2>Select a Show to Track</h2>
 
-<h4>UserShow</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="userShow.LastWatchedSeason" class="control-label"></label>
+                <label asp-for="userShow.Show.Id" class="control-label">Select a Show</label>
+                <select asp-for="userShow.Show.Id" class="form-control">
+                    @foreach (var show in Model.ShowOptions)
+                    {
+                        <option value="@show.Id">@show.Title</option>
+                    }
+                </select>
+                <span asp-validation-for="userShow.Show.Id" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="userShow.LastWatchedSeason" class="control-label">Last Watched Season</label>
                 <input asp-for="userShow.LastWatchedSeason" class="form-control" />
                 <span asp-validation-for="userShow.LastWatchedSeason" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="userShow.LastWatchedEpisode" class="control-label"></label>
+                <label asp-for="userShow.LastWatchedEpisode" class="control-label">Last Watched Episode</label>
                 <input asp-for="userShow.LastWatchedEpisode" class="form-control" />
                 <span asp-validation-for="userShow.LastWatchedEpisode" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="userShow.LastReleasedSeason" class="control-label"></label>
+                <label asp-for="userShow.LastReleasedSeason" class="control-label">Last Released Season</label>
                 <input asp-for="userShow.LastReleasedSeason" class="form-control" />
                 <span asp-validation-for="userShow.LastReleasedSeason" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="userShow.LastReleasedEpisode" class="control-label"></label>
+                <label asp-for="userShow.LastReleasedEpisode" class="control-label">Last Released Episode</label>
                 <input asp-for="userShow.LastReleasedEpisode" class="form-control" />
                 <span asp-validation-for="userShow.LastReleasedEpisode" class="text-danger"></span>
             </div>
@@ -38,7 +47,7 @@
                 <span asp-validation-for="userShow.Note" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="userShow.PlatformId" class="control-label"></label>
+                <label asp-for="userShow.PlatformId" class="control-label">Platform</label>
                 <select asp-for="userShow.PlatformId" class="form-control">
                     @foreach (var platform in Model.PlatformOptions)
                     {
@@ -48,7 +57,7 @@
                 <span asp-validation-for="userShow.PlatformId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="userShow.CategoryId" class="control-label"></label>
+                <label asp-for="userShow.CategoryId" class="control-label">Category</label>
                 <select asp-for="userShow.CategoryId" class="form-control">
                     @foreach (var category in Model.CategoryOptions)
                     {
@@ -56,16 +65,6 @@
                     }
                 </select>
                 <span asp-validation-for="userShow.CategoryId" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="userShow.Show.Id" class="control-label"></label>
-                <select asp-for="userShow.Show.Id" class="form-control">
-                    @foreach (var show in Model.ShowOptions)
-                    {
-                        <option value="@show.Id">@show.Title</option>
-                    }
-                </select>
-                <span asp-validation-for="userShow.Show.Id" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
