@@ -3,6 +3,8 @@ using BingeBuddy.Repositories;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using X.PagedList.Mvc;
+using X.PagedList;
 
 namespace BingeBuddy.Controllers
 {
@@ -16,24 +18,24 @@ namespace BingeBuddy.Controllers
         }
 
         // GET: ShowController
-        public ActionResult Index()
+        public ActionResult Index(int? i)
         {
             var shows = _showRepository.GetAllShows();
-            return View(shows);
+            return View(shows.ToPagedList(i ?? 1, 10));
         }
 
         // GET: Gets approved shows
-        public ActionResult ApprovedShowsIndex(bool approved = true)
+        public ActionResult ApprovedShowsIndex(int? i, bool approved = true)
         {
             var shows = _showRepository.GetShowsByApproved(approved);
-            return View(shows);
+            return View(shows.ToPagedList(i ?? 1, 10));
         }
 
         // GET: Gets unapproved shows
-        public ActionResult UnapprovedShowsIndex(bool approved = false)
+        public ActionResult UnapprovedShowsIndex(int? i, bool approved = false)
         {
             var shows = _showRepository.GetShowsByApproved(approved);
-            return View(shows);
+            return View(shows.ToPagedList(i ?? 1, 10));
         }
 
         // GET: ShowController/Create

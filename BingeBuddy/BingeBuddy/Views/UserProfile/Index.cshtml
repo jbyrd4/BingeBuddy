@@ -8,7 +8,7 @@
 
 <table class="table">
     <thead>
-        <tr>
+        <tr class="rowStyle">
             <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
@@ -27,7 +27,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="rowStyle">
                 <td>
                     @Html.DisplayFor(modelItem => item.Name)
                 </td>
@@ -41,8 +41,8 @@
                     @Html.DisplayFor(modelItem => item.Admin)
                 </td>
                 <td>
-                    @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                    <button class="btn-primary">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                    <button class="btn-primary">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
                 </td>
             </tr>
         }

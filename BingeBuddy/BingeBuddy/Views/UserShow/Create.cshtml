@@ -16,7 +16,10 @@
                 <select asp-for="userShow.Show.Id" class="form-control">
                     @foreach (var show in Model.ShowOptions)
                     {
-                        <option value="@show.Id">@show.Title</option>
+                        if (show.Approved == true)
+                        {
+                            <option value="@show.Id">@show.Title</option>
+                        }
                     }
                 </select>
                 <span asp-validation-for="userShow.Show.Id" class="text-danger"></span>

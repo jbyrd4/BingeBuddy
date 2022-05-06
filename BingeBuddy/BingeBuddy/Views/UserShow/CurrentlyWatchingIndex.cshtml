@@ -1,13 +1,13 @@
 ﻿@model IPagedList<BingeBuddy.Models.UserShow>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "CurrentlyWatchingIndex";
 }
 @using X.PagedList.Mvc.Core;
 @using X.PagedList;
 @using System.Web.Mvc;
 
-<h2>My Shows</h2>
+<h2>Currently Watching</h2>
 
 <p>
     <a asp-action="Create" style="color: blue">Create New</a>
@@ -76,4 +76,4 @@
     </tbody>
 </table>
 
-@Html.PagedListPager(Model, i => Url.Action("Index", "Show", new {i}))
+@Html.PagedListPager(Model, i => Url.Action("CurrentlyWatchingIndex", "Show", new {i}))

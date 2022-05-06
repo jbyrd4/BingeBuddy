@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Security.Claims;
+using X.PagedList.Mvc;
+using X.PagedList;
 
 namespace BingeBuddy.Controllers
 {
@@ -25,27 +27,27 @@ namespace BingeBuddy.Controllers
         }
 
         // GET: UserShowController
-        public ActionResult Index()
+        public ActionResult Index(int? i)
         {
             if (GetCurrentUserId() > 0)
             {
                 int userId = GetCurrentUserId();
                 List<UserShow> userShows = _userShowRepository.GetUserShowsByUserProfileId(userId);
-                return View(userShows);
+                return View(userShows.ToPagedList(i ?? 1, 10));
             }
             else
             {
                 return NotFound();
             }
         }
-        public ActionResult FinishedIndex(int categoryId)
+        public ActionResult FinishedIndex(int categoryId, int? i)
         {
             categoryId = 2;
             if (GetCurrentUserId() > 0)
             {
                 int userId = GetCurrentUserId();
                 List<UserShow> userShows = _userShowRepository.GetUserShowsByCategoryId(userId, categoryId);
-                return View(userShows);
+                return View(userShows.ToPagedList(i ?? 1, 10));
             }
             else
             {
@@ -53,14 +55,14 @@ namespace BingeBuddy.Controllers
             }
         }
 
-        public ActionResult CurrentlyWatchingIndex(int categoryId)
+        public ActionResult CurrentlyWatchingIndex(int categoryId, int? i)
         {
             categoryId = 1;
             if (GetCurrentUserId() > 0)
             {
                 int userId = GetCurrentUserId();
                 List<UserShow> userShows = _userShowRepository.GetUserShowsByCategoryId(userId, categoryId);
-                return View(userShows);
+                return View(userShows.ToPagedList(i ?? 1, 10));
             }
             else
             {
@@ -68,14 +70,14 @@ namespace BingeBuddy.Controllers
             }
         }
 
-        public ActionResult LostInterestIndex(int categoryId)
+        public ActionResult LostInterestIndex(int categoryId, int? i)
         {
             categoryId = 4;
             if (GetCurrentUserId() > 0)
             {
                 int userId = GetCurrentUserId();
                 List<UserShow> userShows = _userShowRepository.GetUserShowsByCategoryId(userId, categoryId);
-                return View(userShows);
+                return View(userShows.ToPagedList(i ?? 1, 10));
             }
             else
             {
@@ -83,14 +85,14 @@ namespace BingeBuddy.Controllers
             }
         }
 
-        public ActionResult CaughtUpIndex(int categoryId)
+        public ActionResult CaughtUpIndex(int categoryId, int? i)
         {
             categoryId = 3;
             if (GetCurrentUserId() > 0)
             {
                 int userId = GetCurrentUserId();
                 List<UserShow> userShows = _userShowRepository.GetUserShowsByCategoryId(userId, categoryId);
-                return View(userShows);
+                return View(userShows.ToPagedList(i ?? 1, 10));
             }
             else
             {
@@ -98,14 +100,14 @@ namespace BingeBuddy.Controllers
             }
         }
 
-        public ActionResult PotentialIndex(int categoryId)
+        public ActionResult PotentialIndex(int categoryId, int? i)
         {
             categoryId = 5;
             if (GetCurrentUserId() > 0)
             {
                 int userId = GetCurrentUserId();
                 List<UserShow> userShows = _userShowRepository.GetUserShowsByCategoryId(userId, categoryId);
-                return View(userShows);
+                return View(userShows.ToPagedList(i ?? 1, 10));
             }
             else
             {

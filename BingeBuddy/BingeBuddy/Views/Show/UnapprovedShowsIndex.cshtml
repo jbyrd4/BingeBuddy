@@ -1,28 +1,31 @@
-﻿@model IEnumerable<BingeBuddy.Models.Show>
+﻿@model IPagedList<BingeBuddy.Models.Show>
 
 @{
     ViewData["Title"] = "UnapprovedShowsIndex";
 }
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using System.Web.Mvc;
 
 <h2>Unapproved Shows</h2>
 
 <p>
-    <a asp-action="Index">Back to Main List</a>
+    <a asp-action="Index" style="color: blue">Back to Main List</a>
 </p>
 <table class="table">
     <thead>
-        <tr>
+        <tr class="rowStyle">
             <th>
-                @Html.DisplayNameFor(model => model.CoverImage)
+                @Html.DisplayNameFor(model => model.First().CoverImage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.First().Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cancelled)
+                @Html.DisplayNameFor(model => model.First().Cancelled)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Approved)
+                @Html.DisplayNameFor(model => model.First().Approved)
             </th>
             <th></th>
         </tr>
@@ -30,7 +33,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="rowStyle">
                 <td>
                    <img style="width: 100px" src="@item.CoverImage" alt="Cover Image" />
                 </td>
@@ -46,11 +49,12 @@
                 @if (User.IsInRole("True"))
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        <button class="btn-primary">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                        <button class="btn-primary">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
                     </td>
                 }
             </tr>
         }
     </tbody>
 </table>
+@Html.PagedListPager(Model, i => Url.Action("UnapprovedShowsIndex", "Show", new {i}))
