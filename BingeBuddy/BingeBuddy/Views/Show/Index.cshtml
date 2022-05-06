@@ -1,32 +1,36 @@
-﻿@model IEnumerable<BingeBuddy.Models.Show>
+﻿@model IPagedList<BingeBuddy.Models.Show>
 
 @{
     ViewData["Title"] = "Index";
 }
+@using X.PagedList.Mvc.Core;
+@using X.PagedList;
+@using System.Web.Mvc;
+
 
 <h2>All Shows</h2>
 
 <p style="display: inline">
-    <a asp-action="Create">Add New Show</a>
+    <a asp-action="Create" style="color: blue">Add New Show</a>
     @if (User.IsInRole("True"))
     {
-        <nobr>|| <a asp-action="ApprovedShowsIndex">See Approved Shows</a> || <a asp-action="UnapprovedShowsIndex">See Unapproved Shows</a></nobr>
+        <nobr>|| <a asp-action="ApprovedShowsIndex" style="color: blue">See Approved Shows</a> || <a asp-action="UnapprovedShowsIndex" style="color: blue">See Unapproved Shows</a></nobr>
     }
 </p>
 <table class="table">
-    <thead>
+    <thead class="rowStyle">
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.CoverImage)
+                @Html.DisplayNameFor(model => model.First().CoverImage)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Title)
+                @Html.DisplayNameFor(model => model.First().Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Cancelled)
+                @Html.DisplayNameFor(model => model.First().Cancelled)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Approved)
+                @Html.DisplayNameFor(model => model.First().Approved)
             </th>
             <th></th>
         </tr>
@@ -34,7 +38,7 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
+            <tr class="rowStyle">
                 <td>
                     <img style="width: 100px" src="@item.CoverImage" alt="Cover Image" />
                 </td>
@@ -50,11 +54,13 @@
                 @if (User.IsInRole("True"))
                 {
                     <td>
-                        @Html.ActionLink("Edit", "Edit", new { id = item.Id })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                        <button class="btn-primary">@Html.ActionLink("Edit", "Edit", new { id = item.Id })</button>
+                        <button class="btn-primary">@Html.ActionLink("Delete", "Delete", new { id = item.Id })</button>
                     </td>
                 }
             </tr>
         }
     </tbody>
 </table>
+
+@Html.PagedListPager(Model, i => Url.Action("Index", "Show", new {i}))
