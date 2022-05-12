@@ -5,7 +5,8 @@ It also allows for a list of potential shows to invenstigate earlier.
 
 You will want to run the included SQL queries to build the database. There is also basic seed data for 105 shows in a seperate query. 
 
-## Login: Set up using Firebase. Users can register and login with a simple email and password authentication.
+## Login: 
+Set up using Firebase. Users can register and login with a simple email and password authentication.
 
 Site Experience:
 Once a user logs in, they can see a list of options in the navigation bar to access the different categories of shows and add/edit/remove them as wanted.
