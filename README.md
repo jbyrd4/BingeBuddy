@@ -8,7 +8,7 @@ You will want to run the included SQL queries to build the database. There is al
 ## Login: 
 Set up using Firebase. Users can register and login with a simple email and password authentication.
 
-Site Experience:
+## Site Experience:
 Once a user logs in, they can see a list of options in the navigation bar to access the different categories of shows and add/edit/remove them as wanted.
 
 ## All Shows: 
